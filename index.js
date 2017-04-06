@@ -8,7 +8,6 @@ const parse = require('rehype-parse');
 const retextStringify = require('retext-stringify');
 
 module.exports = function (input) {
-  console.log('input', input);
   return new Promise(function (resolve, reject) {
     unified()
       .use(parse)
