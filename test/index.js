@@ -21,4 +21,13 @@ describe('pos-tag', function () {
       expect(result.length).to.equal(15);
     });
   });
+
+  it('tags "easy selling point" properly', () => {
+    return pos("Maybe it's an easy selling point and works well for an ad, and that's why Apple emphasizes those features.")
+    .then((result) => {
+      expect(result).to.be.an('array');
+      expect(result.length).to.equal(19);
+      expect(result[4]).to.deep.eql({ word: 'selling', pos: 'NN' });
+    });
+  });
 });
