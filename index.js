@@ -22,10 +22,9 @@ module.exports = function (input) {
         .use(function () {
           return function (cst) {
             visit(cst, 'SentenceNode', function (node) {
-              let sentence = [];
-              visit(node, 'WordNode', function (word) {
-                sentence.push(toString(word));
-              });
+              let sentence = node.children
+                .filter((c) => ['WordNode', 'PunctuationNode'].includes(c.type))
+                .map(toString);
               let tags = new Tag(sentence).initial().smooth().tags;
               items = items.concat(sentence.map((word, i) => {
                 return { word, pos: tags[i] };

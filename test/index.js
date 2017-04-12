@@ -6,7 +6,8 @@ describe('pos-tag', function () {
     return pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.')
     .then(function (result) {
       expect(result).to.be.an('array');
-      expect(result.length).to.equal(15);
+      expect(result.length).to.equal(18);
+      console.log(result);
       result.forEach(function (tuple) {
         expect(tuple).to.be.an('object');
         expect(tuple).to.have.keys('word', 'pos');
@@ -18,7 +19,7 @@ describe('pos-tag', function () {
     return pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.')
     .then(function (result) {
       expect(result).to.be.an('array');
-      expect(result.length).to.equal(15);
+      expect(result.length).to.equal(18);
     });
   });
 
@@ -26,7 +27,7 @@ describe('pos-tag', function () {
     return pos("Maybe it's an easy selling point and works well for an ad, and that's why Apple emphasizes those features.")
     .then((result) => {
       expect(result).to.be.an('array');
-      expect(result.length).to.equal(19);
+      expect(result.length).to.equal(21);
       expect(result[4]).to.deep.eql({ word: 'selling', pos: 'NN' });
     });
   });
