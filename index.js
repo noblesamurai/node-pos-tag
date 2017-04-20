@@ -1,11 +1,11 @@
 const visit = require('unist-util-visit');
 const english = require('retext-english');
-const pos = require('retext-pos');
 const toString = require('nlcst-to-string');
 const rehypePlaintext = require('rehype-plaintext');
 const unified = require('unified');
 const parse = require('rehype-parse');
 const retextStringify = require('retext-stringify');
+const Tag = require('en-pos').Tag;
 
 module.exports = function (input) {
   return new Promise(function (resolve, reject) {
@@ -19,15 +19,16 @@ module.exports = function (input) {
       var items = [];
       unified()
         .use(english)
-        .use(pos)
         .use(function () {
           return function (cst) {
-            visit(cst, 'WordNode', function (node) {
-              var item = {
-                word: toString(node),
-                pos: node.data.partOfSpeech
-              };
-              items.push(item);
+            visit(cst, 'SentenceNode', function (node) {
+              let sentence = node.children
+                .filter((c) => ['WordNode', 'PunctuationNode'].includes(c.type))
+                .map((c) => toString(c));
+              let tags = new Tag(sentence).initial().smooth().tags;
+              items = items.concat(sentence.map((word, i) => {
+                return { word, pos: tags[i] };
+              }));
             });
           };
         })

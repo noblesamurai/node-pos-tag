@@ -26,7 +26,7 @@ pos('Hi there my fine friend, I hope you are well, and eating your delicioius cr
 pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.')
   .then(function (result) {
     expect(result).to.be.an('array');
-    expect(result.length).to.equal(15);
+    expect(result.length).to.equal(18);
   });
 });
 ```
@@ -42,16 +42,19 @@ module.exports(string)
   { word: 'my', pos: 'PRP$' },
   { word: 'fine', pos: 'JJ' },
   { word: 'friend', pos: 'NN' },
+  { word: ',', pos: ',' },
   { word: 'I', pos: 'NN' },
   { word: 'hope', pos: 'NN' },
   { word: 'you', pos: 'PRP' },
   { word: 'are', pos: 'VBP' },
   { word: 'well', pos: 'RB' },
+  { word: ',', pos: ',' },
   { word: 'and', pos: 'CC' },
   { word: 'eating', pos: 'VBG' },
   { word: 'your', pos: 'PRP$' },
   { word: 'delicioius', pos: 'NNS' },
-  { word: 'cranberries', pos: 'NNS' } ]
+  { word: 'cranberries', pos: 'NNS' },
+  { word: '.', pos: '.' } ]
 ```
 
 ## Installation
