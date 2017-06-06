@@ -31,4 +31,12 @@ describe('pos-tag', function () {
       expect(result[4]).to.deep.eql({ word: 'selling', pos: 'NN' });
     });
   });
+
+  it('doesn\'t die on the word "constructor"', () => {
+    return pos('Constructor').then((result) => {
+      expect(result).to.be.an('array');
+      expect(result.length).to.equal(1);
+      expect(result[0]).to.deep.eql({ word: 'Constructor', pos: 'NNP' });
+    });
+  });
 });
