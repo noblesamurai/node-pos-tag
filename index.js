@@ -7,6 +7,11 @@ const parse = require('rehype-parse');
 const retextStringify = require('retext-stringify');
 const Tag = require('en-pos').Tag;
 
+// fix for the word "constructor" which is not in the lexicon (and returns a function which for
+// some reason doesn't have a split method on it...)
+const lexicon = require('en-lexicon');
+lexicon.lexicon['constructor'] = 'NNP';
+
 module.exports = function (input) {
   return new Promise(function (resolve, reject) {
     unified()
