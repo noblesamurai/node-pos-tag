@@ -28,7 +28,7 @@ module.exports = function (input) {
           return function (cst) {
             visit(cst, 'SentenceNode', function (node) {
               let sentence = node.children
-                .filter((c) => ['WordNode', 'PunctuationNode'].includes(c.type))
+                .filter((c) => ['WordNode', 'PunctuationNode', 'SymbolNode'].includes(c.type))
                 .map((c) => toString(c));
               let tags = new Tag(sentence).initial().smooth().tags;
               items = items.concat(sentence.map((word, i) => {
