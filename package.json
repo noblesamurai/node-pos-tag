@@ -1,7 +1,7 @@
 {
   "name": "pos-tag",
   "description": "Simple POS tagging for a given string.",
-  "version": "1.2.0-0",
+  "version": "1.2.0",
   "author": "Tim Allen <tim@noblesamurai.com>",
   "license": "BSD",
   "main": "index.js",
