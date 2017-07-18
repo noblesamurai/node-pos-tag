@@ -39,7 +39,7 @@ module.exports = function (input) {
         })
         .use(retextStringify)
         .process(input);
-      return resolve(items);
+      return setImmediate(resolve, items);
     }
   });
 };
