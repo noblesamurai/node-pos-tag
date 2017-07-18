@@ -12,30 +12,26 @@ Obtain POS tagging of a string which may contain HTML tags.
 const pos = require('pos-tag');
 const expect = require('chai').expect;
 
-pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.')
-  .then(function (result) {
-    expect(result).to.be.an('array');
-    expect(result.length).to.equal(15);
-    result.forEach(function (tuple) {
-      expect(tuple).to.be.an('object');
-      expect(tuple).to.have.keys('word', 'pos');
-    });
-  });
+const result = pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.');
+
+expect(result).to.be.an('array');
+expect(result.length).to.equal(15);
+result.forEach(function (tuple) {
+  expect(tuple).to.be.an('object');
+  expect(tuple).to.have.keys('word', 'pos');
 });
 
-pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.')
-  .then(function (result) {
-    expect(result).to.be.an('array');
-    expect(result.length).to.equal(18);
-  });
-});
+const result =  =  pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.');
+
+expect(result2).to.be.an('array');
+expect(result2.length).to.equal(18);
 ```
 
 ## API
 
 ```js
 module.exports(string)
-// returns a promise that resolve to something like:
+// returns something like:
 
 [ { word: 'Hi', pos: 'UH' },
   { word: 'there', pos: 'EX' },
