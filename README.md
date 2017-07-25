@@ -21,7 +21,7 @@ result.forEach(function (tuple) {
   expect(tuple).to.have.keys('word', 'pos');
 });
 
-const result =  =  pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.');
+const result = pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.');
 
 expect(result2).to.be.an('array');
 expect(result2.length).to.equal(18);
