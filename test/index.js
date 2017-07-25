@@ -3,40 +3,32 @@ const pos = require('..');
 
 describe('pos-tag', function () {
   it('POS tags stuff', function () {
-    return pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.')
-    .then(function (result) {
-      expect(result).to.be.an('array');
-      expect(result.length).to.equal(18);
-      console.log(result);
-      result.forEach(function (tuple) {
-        expect(tuple).to.be.an('object');
-        expect(tuple).to.have.keys('word', 'pos');
-      });
+    const result = pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.');
+    expect(result).to.be.an('array');
+    expect(result.length).to.equal(18);
+    result.forEach(function (tuple) {
+      expect(tuple).to.be.an('object');
+      expect(tuple).to.have.keys('word', 'pos');
     });
   });
 
   it('even handles HTML ', function () {
-    return pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.')
-    .then(function (result) {
-      expect(result).to.be.an('array');
-      expect(result.length).to.equal(18);
-    });
+    const result = pos('Hi there my <em> fine friend </em>, I hope you are well, and eating your <strong> delicioius </strong> cranberries.');
+    expect(result).to.be.an('array');
+    expect(result.length).to.equal(18);
   });
 
   it('tags "easy selling point" properly', () => {
-    return pos("Maybe it's an easy selling point and works well for an ad, and that's why Apple emphasizes those features.")
-    .then((result) => {
-      expect(result).to.be.an('array');
-      expect(result.length).to.equal(21);
-      expect(result[4]).to.deep.eql({ word: 'selling', pos: 'NN' });
-    });
+    const result = pos("Maybe it's an easy selling point and works well for an ad, and that's why Apple emphasizes those features.");
+    expect(result).to.be.an('array');
+    expect(result.length).to.equal(21);
+    expect(result[4]).to.deep.eql({ word: 'selling', pos: 'NN' });
   });
 
   it('doesn\'t die on the word "constructor"', () => {
-    return pos('Constructor').then((result) => {
-      expect(result).to.be.an('array');
-      expect(result.length).to.equal(1);
-      expect(result[0]).to.deep.eql({ word: 'Constructor', pos: 'NNP' });
-    });
+    const result = pos('Constructor');
+    expect(result).to.be.an('array');
+    expect(result.length).to.equal(1);
+    expect(result[0]).to.deep.eql({ word: 'Constructor', pos: 'NNP' });
   });
 });
