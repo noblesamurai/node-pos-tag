@@ -6,8 +6,8 @@ const leakage = require('leakage');
 describe('pos-tag', function () {
   it.only('POS tags stuff', function () {
     this.timeout(2000 * 60);
-    return leakage.iterate(() => {
-      const result = pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.');
+    leakage.iterate(() => {
+      pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.');
       /*
       expect(result).to.be.an('array');
       expect(result.length).to.equal(18);
