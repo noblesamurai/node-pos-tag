@@ -7,6 +7,7 @@
   "main": "index.js",
   "scripts": {
     "coverage": "nyc -a -c -r html -r text npm test",
+    "pretest": "semistandard --env mocha",
     "test": "mocha --recursive test",
     "docs": "jsdoc2md index.js"
   },
@@ -34,7 +35,6 @@
   "devDependencies": {
     "chai": "~3.5.0",
     "jsdoc-to-markdown": "~2.0.1",
-    "leakage": "^0.3.0",
     "mocha": "~3.2.0",
     "nyc": "^10.1.2",
     "semistandard": "*"

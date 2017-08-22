@@ -1,24 +1,13 @@
-const visit = require('unist-util-visit');
-const toString = require('nlcst-to-string');
-const unified = require('unified');
-const parse = require('rehype-parse');
-const rehype2retext = require('rehype-retext');
+const zipWith = require('lodash.zipwith');
 const Tag = require('en-pos').Tag;
-const parseEnglish = require('parse-english');
-
-// fix for the word "constructor" which is not in the lexicon (and returns a function which for
-// some reason doesn't have a split method on it...)
-const lexicon = require('en-lexicon');
-lexicon.lexicon['constructor'] = 'NNP';
-
-let items;
-const processor = unified()
-  .use(parse)
-  .use(rehype2retext, parseEnglish);
 
 module.exports = function (input) {
-  let parsed = processor.parse(input);
-  processor.runSync(parsed);
+  const words = input.split(' ');
 
-  return items;
+  const result = new Tag(words)
+  .initial() // initial dictionary and pattern based tagging
+  .smooth(); // further context based smoothing
+
+  const ret = zipWith(result.tokens, result.tags, (word, pos) => ({ word, pos }));
+  return ret;
 };
