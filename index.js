@@ -11,12 +11,25 @@ const parseEnglish = require('parse-english');
 const lexicon = require('en-lexicon');
 lexicon.lexicon['constructor'] = 'NNP';
 
-let items;
-const processor = unified()
-  .use(parse)
-  .use(rehype2retext, parseEnglish);
-
 module.exports = function (input) {
+  let items = [];
+  const processor = unified()
+    .use(parse)
+    .use(rehype2retext, parseEnglish)
+    .use(function () {
+      return function (cst) {
+        visit(cst, 'SentenceNode', function (node) {
+          let sentence = node.children
+            .filter((c) => ['WordNode', 'PunctuationNode', 'SymbolNode'].includes(c.type))
+            .map((c) => toString(c));
+          let tags = new Tag(sentence).initial().smooth().tags;
+          items = items.concat(sentence.map((word, i) => {
+            return { word, pos: tags[i] };
+          }));
+        });
+      };
+    });
+
   let parsed = processor.parse(input);
   processor.runSync(parsed);
 
