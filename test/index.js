@@ -1,14 +1,21 @@
 const expect = require('chai').expect;
 const pos = require('..');
 
+const leakage = require('leakage');
+
 describe('pos-tag', function () {
-  it('POS tags stuff', function () {
-    const result = pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.');
-    expect(result).to.be.an('array');
-    expect(result.length).to.equal(18);
-    result.forEach(function (tuple) {
-      expect(tuple).to.be.an('object');
-      expect(tuple).to.have.keys('word', 'pos');
+  it.only('POS tags stuff', function () {
+    this.timeout(2000 * 60);
+    return leakage.iterate(() => {
+      const result = pos('Hi there my fine friend, I hope you are well, and eating your delicioius cranberries.');
+      /*
+      expect(result).to.be.an('array');
+      expect(result.length).to.equal(18);
+      result.forEach(function (tuple) {
+        expect(tuple).to.be.an('object');
+        expect(tuple).to.have.keys('word', 'pos');
+      });
+      */
     });
   });
 
