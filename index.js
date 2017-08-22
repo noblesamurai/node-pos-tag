@@ -17,5 +17,8 @@ const processor = unified()
   .use(rehype2retext, parseEnglish);
 
 module.exports = function (input) {
+  let parsed = processor.parse(input);
+  processor.runSync(parsed);
+
   return items;
 };
