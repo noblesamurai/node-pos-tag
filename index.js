@@ -21,7 +21,9 @@ module.exports = function (input) {
         visit(cst, 'SentenceNode', function (node) {
           let sentence = node.children
             .filter((c) => ['WordNode', 'PunctuationNode', 'SymbolNode'].includes(c.type))
-            .map((c) => toString(c));
+            // HACK: Truncate any word longer than 40 chars as en-pos will not be performant.
+            .map((c) => toString(c).split(0, 40));
+
           let tags = new Tag(sentence).initial().smooth().tags;
           items = items.concat(sentence.map((word, i) => {
             return { word, pos: tags[i] };
