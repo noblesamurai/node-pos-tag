@@ -21,10 +21,10 @@ module.exports = function (input) {
         visit(cst, 'SentenceNode', function (node) {
           let sentence = node.children
             .filter((c) => ['WordNode', 'PunctuationNode', 'SymbolNode'].includes(c.type))
-            // HACK: Truncate any word longer than 40 chars as en-pos will not be performant.
-            .map((c) => toString(c).slice(0, 40));
+            .map((c) => toString(c));
 
-          let tags = new Tag(sentence).initial().smooth().tags;
+            // HACK: Truncate any word longer than 40 chars as en-pos will not be performant.
+          let tags = new Tag(sentence.map((s) => s.slice(0, 40))).initial().smooth().tags;
           items = items.concat(sentence.map((word, i) => {
             return { word, pos: tags[i] };
           }));
