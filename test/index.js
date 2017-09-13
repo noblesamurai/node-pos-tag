@@ -25,6 +25,11 @@ describe('pos-tag', function () {
     expect(result[4]).to.deep.eql({ word: 'selling', pos: 'NN' });
   });
 
+  it('tags "00000000000000000000000000000000000000000000000000000000000000000000000000000consistent over time," with OK performance', () => {
+    const result = pos('00000000000000000000000000000000000000000000000000000000000000000000000000000consistent over time,');
+    expect(result).to.be.an('array');
+  });
+
   it('doesn\'t die on the word "constructor"', () => {
     const result = pos('Constructor');
     expect(result).to.be.an('array');
