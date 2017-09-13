@@ -22,7 +22,7 @@ module.exports = function (input) {
           let sentence = node.children
             .filter((c) => ['WordNode', 'PunctuationNode', 'SymbolNode'].includes(c.type))
             // HACK: Truncate any word longer than 40 chars as en-pos will not be performant.
-            .map((c) => toString(c).split(0, 40));
+            .map((c) => toString(c).slice(0, 40));
 
           let tags = new Tag(sentence).initial().smooth().tags;
           items = items.concat(sentence.map((word, i) => {
