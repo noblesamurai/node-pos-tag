@@ -24,7 +24,7 @@ module.exports = function (input) {
             .map((c) => toString(c));
 
             // HACK: Truncate any word longer than 40 chars as en-pos will not be performant.
-          let tags = new Tag(sentence.map((s) => s.slice(0, 40))).initial().smooth().tags;
+          let tags = new Tag(sentence.map((word) => word.slice(0, 40))).initial().smooth().tags;
           items = items.concat(sentence.map((word, i) => {
             return { word, pos: tags[i] };
           }));
