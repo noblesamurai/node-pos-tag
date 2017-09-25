@@ -13,6 +13,7 @@ lexicon.lexicon['constructor'] = 'NNP';
 
 module.exports = function (input) {
   let items = [];
+  if (input === '') return items;
   const processor = unified()
     .use(parse)
     .use(rehype2retext, parseEnglish)
