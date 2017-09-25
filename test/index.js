@@ -36,4 +36,8 @@ describe('pos-tag', function () {
     expect(result.length).to.equal(1);
     expect(result[0]).to.deep.eql({ word: 'Constructor', pos: 'NNP' });
   });
+
+  it('tags empty string ok', () => {
+    pos('');
+  });
 });
