@@ -5,6 +5,7 @@ const parse = require('rehype-parse');
 const rehype2retext = require('rehype-retext');
 const Tag = require('en-pos').Tag;
 const parseEnglish = require('parse-english');
+const trim = require('lodash.trim');
 
 // fix for the word "constructor" which is not in the lexicon (and returns a function which for
 // some reason doesn't have a split method on it...)
@@ -13,7 +14,7 @@ lexicon.lexicon['constructor'] = 'NNP';
 
 module.exports = function (input) {
   let items = [];
-  if (input === '') return items;
+  if (trim(input) === '') return items;
   const processor = unified()
     .use(parse)
     .use(rehype2retext, parseEnglish)
