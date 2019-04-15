@@ -24,6 +24,7 @@
     "npm": "3.x"
   },
   "dependencies": {
+    "en-lexicon": "^1.0.11",
     "en-pos": "^1.0.16",
     "lodash.trim": "^4.5.1",
     "nlcst-to-string": "^2.0.1",
