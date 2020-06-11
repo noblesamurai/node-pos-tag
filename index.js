@@ -10,7 +10,7 @@ const trim = require('lodash.trim');
 // fix for the word "constructor" which is not in the lexicon (and returns a function which for
 // some reason doesn't have a split method on it...)
 const lexicon = require('en-lexicon');
-lexicon.lexicon['constructor'] = 'NNP';
+lexicon.lexicon.constructor = 'NNP';
 
 module.exports = function (input) {
   let items = [];
@@ -21,19 +21,19 @@ module.exports = function (input) {
     .use(function () {
       return function (cst) {
         visit(cst, 'SentenceNode', function (node) {
-          let sentence = node.children
+          const sentence = node.children
             .filter((c) => ['WordNode', 'PunctuationNode', 'SymbolNode'].includes(c.type))
             .map((c) => toString(c));
 
           // HACK: Truncate any word longer than 40 chars as en-pos will not be performant.
-          let tags = new Tag(sentence.map((word) => word.slice(0, 40))).initial().smooth().tags;
+          const tags = new Tag(sentence.map((word) => word.slice(0, 40))).initial().smooth().tags;
           items = items.concat(sentence.map((word, i) => {
             return { word, pos: tags[i] };
           }));
         });
       };
     });
-  let parsed = processor.parse(input);
+  const parsed = processor.parse(input);
   processor.runSync(parsed);
 
   return items;
