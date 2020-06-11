@@ -20,7 +20,7 @@
     "url": "https://github.com/noblesamurai/pos-tag/issues"
   },
   "engines": {
-    "node": "^12 || ^14",
+    "node": "^10 || ^12 || ^14",
     "npm": "6.x"
   },
   "dependencies": {
